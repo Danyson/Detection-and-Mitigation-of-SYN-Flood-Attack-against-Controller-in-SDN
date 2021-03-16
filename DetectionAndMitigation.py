@@ -1,5 +1,4 @@
 from operator import attrgetter
-
 from ryu.app import simple_switch_13
 from ryu.controller import ofp_event
 from ryu.controller.handler import MAIN_DISPATCHER, DEAD_DISPATCHER
@@ -22,8 +21,8 @@ class SimpleMonitor13(simple_switch_13.SimpleSwitch13,packet_base.PacketBase):
 	print(pkt.has_flags(tcp.TCP_SYN, tcp.TCP_ACK))
 
 
-  
-	
+
+
 
 
     @set_ev_cls(ofp_event.EventOFPStateChange,
@@ -56,7 +55,7 @@ class SimpleMonitor13(simple_switch_13.SimpleSwitch13,packet_base.PacketBase):
         req = parser.OFPPortStatsRequest(datapath, 0, ofproto.OFPP_ANY)
         datapath.send_msg(req)
 
-    
+
     @set_ev_cls(ofp_event.EventOFPFlowStatsReply, MAIN_DISPATCHER)
     def _flow_stats_reply_handler(self, ev):
         body = ev.msg.body
@@ -83,7 +82,7 @@ class SimpleMonitor13(simple_switch_13.SimpleSwitch13,packet_base.PacketBase):
 	    AC=stat.byte_count
 	    count=stat.packet_count
 	    if(AC>K and count>C):
-		ds=[]			
+		ds=[]
 		ds=stat.match['eth_dst']
 		in_port=stat.match['in_port']
 		d_id=ev.msg.datapath.id
@@ -97,21 +96,21 @@ class SimpleMonitor13(simple_switch_13.SimpleSwitch13,packet_base.PacketBase):
                 	dstip = ip.dst
                 	match = parser.OFPMatch(eth_type=ether_types.ETH_TYPE_IP,
                        	                 ipv4_src=srcip,
-                                        
+
                          	               )
 		print(match)'''
 		#print(ip)
 		print("______________________________Ethernet dst Attacker_______________________________________________")
-		print 'DPID    :',d_id		
+		print 'DPID    :',d_id
 		print 'IN_PORT :',in_port
-		
-		
-	    	 
+
+
+
 	    import math
 	    print("__________________________________________ Byte count so far______________________________________")
 	    byte.append(stat.byte_count)
 	    print(byte)
-	   
+
 	    print("_________________________________________No of bytes in each host_________________________________")
 	    print(byte[-1])
 	    b1=byte[-1]
@@ -134,19 +133,3 @@ class SimpleMonitor13(simple_switch_13.SimpleSwitch13,packet_base.PacketBase):
 	    #print(1-p*(abs(math.log(p,2))))
 	    #p1=1-p*(abs(math.log(p,2)))
     	    #print(p1/math.log(2,2))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
