@@ -84,8 +84,8 @@ class DetectionEntropy(simple_switch_13.SimpleSwitch13,packet_base.PacketBase):
         N=b1+b2
         print(N)
         print("_____________________________________________Entropy Ratio________________________________________")
-        self.bytes_in_each_host = [b1, b2]
-        self.entropy = scipy.stats.entropy(self.bytes_in_each_host)
+        self.bytes_in_each_port = [b1, b2]
+        self.entropy = scipy.stats.entropy(self.bytes_in_each_port)
         print(self.entropy)
         pkt = tcp.tcp(bits=(tcp.TCP_SYN & tcp.TCP_ACK))
         print(pkt.has_flags(tcp.TCP_SYN, tcp.TCP_ACK))
